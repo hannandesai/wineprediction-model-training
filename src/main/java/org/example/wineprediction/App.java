@@ -1,27 +1,26 @@
 package org.example.wineprediction;
 
+// import java.util.logging.LogManager;
+
 // import com.amazonaws.auth.AWSCredentials;
 // import com.amazonaws.auth.EnvironmentVariableCredentialsProvider;
-import org.apache.log4j.Level;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+// import org.apache.log4j.Level;
+// import org.apache.log4j.LogManager;
+// import org.apache.log4j.Logger;
 import org.apache.spark.sql.SparkSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class App {
+        public static final Logger logger = LoggerFactory.getLogger(App.class);
 
-        public static final Logger logger = LogManager.getLogger(App.class);
-
-        private static final String ACCESS_KEY_ID = "ASIA5FTY7O2RKQ5H7DC4"; // System.getProperty("ACCESS_KEY_ID");
-        private static final String SECRET_KEY = "Da1IoFrBDNAP1ZI4ewftGnG1FPsbFuk/57ebEfCI"; // System.getProperty("SECRET_KEY");
+        private static final String ACCESS_KEY_ID = "ASIAXYKJW6JZ6ITZYO6M"; // System.getProperty("ACCESS_KEY_ID");
+        private static final String SECRET_KEY = "UM6z6dIQfJ5CQ6MOZLNutpvltFwhtOHHTCT6dH72"; // System.getProperty("SECRET_KEY");
 
         private static final String MASTER_URI = "local[*]";
 
         public static void main(String[] args) {
-
-                Logger.getLogger("org").setLevel(Level.ERROR);
-                Logger.getLogger("akka").setLevel(Level.ERROR);
-                Logger.getLogger("breeze.optimize").setLevel(Level.ERROR);
-                Logger.getLogger("com.amazonaws.auth").setLevel(Level.DEBUG);
 
                 SparkSession spark = SparkSession.builder()
                                 .appName("Wine Quality Prediction App").master(MASTER_URI)
