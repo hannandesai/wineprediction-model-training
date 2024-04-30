@@ -20,9 +20,6 @@ public class LogisticRegressionV2 {
     private static final String TRAINING_DATASET = "s3a://wineprediction7/TrainingDataset.csv";
     private static final String VALIDATION_DATASET = "s3a://wineprediction7/ValidationDataset.csv";
     private static final String MODEL_PATH = "s3a://wineprediction7/LogisticRegressionModel";
-    // private static final String TRAINING_DATASET = "wineprediction7/TrainingDataset.csv";
-    // private static final String VALIDATION_DATASET = "wineprediction7/ValidationDataset.csv";
-    // private static final String MODEL_PATH = "wineprediction7/LogisticRegressionModel";
 
     public void trainModel(SparkSession spark) {
         Dataset<Row> lblFeatureDf = getDataFrame(spark, true, TRAINING_DATASET).cache();
@@ -87,10 +84,12 @@ public class LogisticRegressionV2 {
         evaluator.setMetricName("weightedRecall");
         double weightedRecall = evaluator.evaluate(predictions);
 
+        System.out.println("===============================Performance Matrix ====================================");
         System.out.println("Accuracy: " + accuracy1);
         System.out.println("F1: " + f1);
-        System.out.println("Precision: " + weightedPrecision);
-        System.out.println("Recall: " + weightedRecall);
+        System.out.println("===============================Performance Matrix Ends====================================");
+        // System.out.println("Precision: " + weightedPrecision);
+        // System.out.println("Recall: " + weightedRecall);
     }
 
     private Dataset<Row> getDataFrame(SparkSession spark, boolean transform, String name) {
